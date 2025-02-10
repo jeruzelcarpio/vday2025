@@ -38,7 +38,7 @@ export default function ValentinePage() {
   const handleYesClick = () => {
     setIsYesClicked(true);
     setIsBrokenHeart(false);
-    // Generate new happy hearts when yes is clicked
+    
     const newHearts = Array.from({ length: 30 }, (_, i) => ({
       id: i,
       left: Math.random() * 100,
