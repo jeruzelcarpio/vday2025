@@ -1,5 +1,3 @@
-// Jeruzel V. Carpio
-
 'use client';
 
 import { useState, useEffect } from "react";
@@ -32,7 +30,7 @@ export default function ValentinePage() {
       scale: 0.5 + Math.random(),
       delay: Math.random() * 5,
       rotation: Math.random() * 30 - 15,
-      fillOpacity: Math.random() * 0.5 + 0.5
+      fillOpacity: Math.random() * 0.5 + 0.5,
     }));
     setHearts(newHearts);
   }, []);
@@ -48,7 +46,7 @@ export default function ValentinePage() {
       scale: 0.5 + Math.random(),
       delay: Math.random() * 5,
       rotation: Math.random() * 360,
-      fillOpacity: Math.random() * 0.3 + 0.7
+      fillOpacity: Math.random() * 0.3 + 0.7,
     }));
     setHearts(newHearts);
   };
@@ -70,7 +68,8 @@ export default function ValentinePage() {
     "Don't break my heart 💔"
   ];
 
-  const HeartIcon = isBrokenHeart ? HeartCrack : (isYesClicked ? Heart : Heart);
+  // Choose HeartCrack when broken; otherwise use Heart.
+  const HeartIcon = isBrokenHeart ? HeartCrack : Heart;
 
   const getExpressionGif = () => {
     if (isYesClicked) return "/happy.gif";
@@ -141,11 +140,11 @@ export default function ValentinePage() {
               animationDelay: `${heart.delay}s`,
               transform: `scale(${heart.scale}) rotate(${heart.rotation}deg)`,
               color: isBrokenHeart ? '#ef4444' : 'var(--pink-gradient-to)',
-              fill: isYesClicked ? 'currentColor' : 'none',
-              fillOpacity: isYesClicked ? heart.fillOpacity : 0,
-              stroke: isYesClicked ? 'none' : 'currentColor',
-              strokeWidth: isYesClicked ? 0 : 2,
             }}
+            fill={isYesClicked ? "currentColor" : "none"}
+            fillOpacity={isYesClicked ? heart.fillOpacity : 0}
+            stroke={isYesClicked ? "none" : "currentColor"}
+            strokeWidth={isYesClicked ? 0 : 2}
             size={24}
           />
         ))}
@@ -202,18 +201,14 @@ export default function ValentinePage() {
 
       <HeartIcon 
         className="absolute bottom-4 left-4 animate-pulse" 
-        style={{ 
-          color: isBrokenHeart ? '#ef4444' : 'var(--pink-gradient-to)',
-          fill: isYesClicked ? 'currentColor' : 'none',
-        }} 
+        style={{ color: isBrokenHeart ? '#ef4444' : 'var(--pink-gradient-to)' }} 
+        fill={isYesClicked ? "currentColor" : "none"}
         size={32} 
       />
       <HeartIcon 
         className="absolute top-4 right-4 animate-pulse" 
-        style={{ 
-          color: isBrokenHeart ? '#ef4444' : 'var(--pink-gradient-to)',
-          fill: isYesClicked ? 'currentColor' : 'none',
-        }} 
+        style={{ color: isBrokenHeart ? '#ef4444' : 'var(--pink-gradient-to)' }} 
+        fill={isYesClicked ? "currentColor" : "none"}
         size={32} 
       />
     </div>
