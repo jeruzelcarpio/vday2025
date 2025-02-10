@@ -68,7 +68,7 @@ export default function ValentinePage() {
     "Don't break my heart 💔"
   ];
 
-  // Choose HeartCrack when broken; otherwise use Heart.
+  // Use HeartCrack when broken; otherwise use Heart.
   const HeartIcon = isBrokenHeart ? HeartCrack : Heart;
 
   const getExpressionGif = () => {
@@ -88,9 +88,15 @@ export default function ValentinePage() {
     return Math.min(scale, 2);
   };
 
+  // Define a fallback color if --pink-gradient-to is not set
+  const iconColor = isBrokenHeart ? '#ef4444' : 'var(--pink-gradient-to, #f472b6)';
+
   return (
     <div className="valentine-container flex flex-col items-center justify-center min-h-screen p-4 text-center relative overflow-hidden">
       <style jsx global>{`
+        :root {
+          --pink-gradient-to: #f472b6;
+        }
         @keyframes floatHeart {
           0% {
             transform: translate(0, 0) scale(1) rotate(0deg);
@@ -139,7 +145,7 @@ export default function ValentinePage() {
               top: `${heart.top}%`,
               animationDelay: `${heart.delay}s`,
               transform: `scale(${heart.scale}) rotate(${heart.rotation}deg)`,
-              color: isBrokenHeart ? '#ef4444' : 'var(--pink-gradient-to)',
+              color: iconColor,
             }}
             fill={isYesClicked ? "currentColor" : "none"}
             fillOpacity={isYesClicked ? heart.fillOpacity : 0}
@@ -155,7 +161,7 @@ export default function ValentinePage() {
         transition-colors duration-500 max-w-md w-full`}>
         <Stars 
           className="absolute -top-6 left-1/2 -translate-x-1/2" 
-          style={{ color: isBrokenHeart ? '#ef4444' : 'var(--pink-gradient-to)' }} 
+          style={{ color: iconColor }} 
           size={48} 
         />
         
@@ -168,7 +174,7 @@ export default function ValentinePage() {
             <div className="space-y-2 w-full">
               <div>Will you be my</div>
               <div className="text-4xl md:text-5xl" 
-                   style={{ color: isBrokenHeart ? '#ef4444' : 'var(--pink-gradient-to)' }}>
+                   style={{ color: iconColor }}>
                 Valentine?
               </div>
             </div>
@@ -201,13 +207,13 @@ export default function ValentinePage() {
 
       <HeartIcon 
         className="absolute bottom-4 left-4 animate-pulse" 
-        style={{ color: isBrokenHeart ? '#ef4444' : 'var(--pink-gradient-to)' }} 
+        style={{ color: iconColor }} 
         fill={isYesClicked ? "currentColor" : "none"}
         size={32} 
       />
       <HeartIcon 
         className="absolute top-4 right-4 animate-pulse" 
-        style={{ color: isBrokenHeart ? '#ef4444' : 'var(--pink-gradient-to)' }} 
+        style={{ color: iconColor }} 
         fill={isYesClicked ? "currentColor" : "none"}
         size={32} 
       />
