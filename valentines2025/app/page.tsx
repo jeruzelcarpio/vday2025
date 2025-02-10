@@ -149,7 +149,6 @@ export default function ValentinePage() {
         ))}
       </div>
 
-      {/* Rest of the component remains the same */}
       <div className={`valentine-card relative z-10 backdrop-blur-sm rounded-3xl p-8 shadow-xl border 
         ${isBrokenHeart ? 'border-red-200 shadow-red-100' : 'border-pink-200 shadow-pink-100'}
         transition-colors duration-500 max-w-md w-full`}>
