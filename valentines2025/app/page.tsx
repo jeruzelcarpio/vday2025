@@ -68,7 +68,6 @@ export default function ValentinePage() {
     "Don't break my heart 💔"
   ];
 
-  // Use HeartCrack when broken; otherwise use Heart.
   const HeartIcon = isBrokenHeart ? HeartCrack : Heart;
 
   const getExpressionGif = () => {
@@ -88,7 +87,6 @@ export default function ValentinePage() {
     return Math.min(scale, 2);
   };
 
-  // Define a fallback color if --pink-gradient-to is not set
   const iconColor = isBrokenHeart ? '#ef4444' : 'var(--pink-gradient-to, #f472b6)';
 
   return (

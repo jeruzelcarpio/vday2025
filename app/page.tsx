@@ -1,5 +1,3 @@
-//Jeruzel Carpio, February 2025
-
 'use client';
 
 import { useState, useEffect } from "react";
@@ -13,6 +11,7 @@ interface HeartType {
   scale: number;
   delay: number;
   rotation: number;
+  fillOpacity: number;
 }
 
 export default function ValentinePage() {
@@ -30,7 +29,8 @@ export default function ValentinePage() {
       top: Math.random() * 100,
       scale: 0.5 + Math.random(),
       delay: Math.random() * 5,
-      rotation: Math.random() * 30 - 15
+      rotation: Math.random() * 30 - 15,
+      fillOpacity: Math.random() * 0.5 + 0.5,
     }));
     setHearts(newHearts);
   }, []);
@@ -38,6 +38,17 @@ export default function ValentinePage() {
   const handleYesClick = () => {
     setIsYesClicked(true);
     setIsBrokenHeart(false);
+    
+    const newHearts = Array.from({ length: 30 }, (_, i) => ({
+      id: i,
+      left: Math.random() * 100,
+      top: Math.random() * 100,
+      scale: 0.5 + Math.random(),
+      delay: Math.random() * 5,
+      rotation: Math.random() * 360,
+      fillOpacity: Math.random() * 0.3 + 0.7,
+    }));
+    setHearts(newHearts);
   };
 
   const handleNoClick = () => {
@@ -60,12 +71,8 @@ export default function ValentinePage() {
   const HeartIcon = isBrokenHeart ? HeartCrack : Heart;
 
   const getExpressionGif = () => {
-    if (isYesClicked) {
-      return "/happy.gif";
-    }
-    if (isBrokenHeart) {
-      return "/sad.gif";
-    }
+    if (isYesClicked) return "/happy.gif";
+    if (isBrokenHeart) return "/sad.gif";
     return "/hopeful.gif";
   };
 
@@ -80,8 +87,41 @@ export default function ValentinePage() {
     return Math.min(scale, 2);
   };
 
+  const iconColor = isBrokenHeart ? '#ef4444' : 'var(--pink-gradient-to, #f472b6)';
+
   return (
     <div className="valentine-container flex flex-col items-center justify-center min-h-screen p-4 text-center relative overflow-hidden">
+      <style jsx global>{`
+        :root {
+          --pink-gradient-to: #f472b6;
+        }
+        @keyframes floatHeart {
+          0% {
+            transform: translate(0, 0) scale(1) rotate(0deg);
+          }
+          33% {
+            transform: translate(10px, -15px) scale(1.1) rotate(5deg);
+          }
+          66% {
+            transform: translate(-10px, -25px) scale(0.9) rotate(-5deg);
+          }
+          100% {
+            transform: translate(0, -50px) scale(1) rotate(0deg);
+            opacity: 0;
+          }
+        }
+        
+        .heart-float {
+          animation: floatHeart 4s ease-in-out infinite;
+          opacity: 0.8;
+        }
+        
+        .heart-float.clicked {
+          animation-duration: 3s;
+          animation-timing-function: ease-out;
+        }
+      `}</style>
+
       <div className="mb-6 rounded-full overflow-hidden shadow-lg border-4 border-pink-200">
         <Image
           src={getExpressionGif()}
@@ -97,14 +137,18 @@ export default function ValentinePage() {
         {hearts.map((heart) => (
           <HeartIcon
             key={heart.id}
-            className="absolute animate-float opacity-50 transition-all duration-500"
+            className={`absolute heart-float ${isYesClicked ? 'clicked' : ''}`}
             style={{
               left: `${heart.left}%`,
               top: `${heart.top}%`,
               animationDelay: `${heart.delay}s`,
               transform: `scale(${heart.scale}) rotate(${heart.rotation}deg)`,
-              color: isBrokenHeart ? '#ef4444' : 'var(--pink-gradient-to)',
+              color: iconColor,
             }}
+            fill={isYesClicked ? "currentColor" : "none"}
+            fillOpacity={isYesClicked ? heart.fillOpacity : 0}
+            stroke={isYesClicked ? "none" : "currentColor"}
+            strokeWidth={isYesClicked ? 0 : 2}
             size={24}
           />
         ))}
@@ -115,20 +159,20 @@ export default function ValentinePage() {
         transition-colors duration-500 max-w-md w-full`}>
         <Stars 
           className="absolute -top-6 left-1/2 -translate-x-1/2" 
-          style={{ color: isBrokenHeart ? '#ef4444' : 'var(--pink-gradient-to)' }} 
+          style={{ color: iconColor }} 
           size={48} 
         />
         
         <h1 className="text-2xl md:text-3xl font-bold mb-8 flex flex-col items-center justify-center">
           {isYesClicked ? (
             <div className="animate-bounce inline-flex items-center justify-center w-full">
-              YAYY! SEE YOU SOON! 🎉💖
+              YAYY! SEE YOU SOON! 💖💖💖
             </div>
           ) : (
             <div className="space-y-2 w-full">
               <div>Will you be my</div>
               <div className="text-4xl md:text-5xl" 
-                   style={{ color: isBrokenHeart ? '#ef4444' : 'var(--pink-gradient-to)' }}>
+                   style={{ color: iconColor }}>
                 Valentine?
               </div>
             </div>
@@ -161,12 +205,14 @@ export default function ValentinePage() {
 
       <HeartIcon 
         className="absolute bottom-4 left-4 animate-pulse" 
-        style={{ color: isBrokenHeart ? '#ef4444' : 'var(--pink-gradient-to)' }} 
+        style={{ color: iconColor }} 
+        fill={isYesClicked ? "currentColor" : "none"}
         size={32} 
       />
       <HeartIcon 
         className="absolute top-4 right-4 animate-pulse" 
-        style={{ color: isBrokenHeart ? '#ef4444' : 'var(--pink-gradient-to)' }} 
+        style={{ color: iconColor }} 
+        fill={isYesClicked ? "currentColor" : "none"}
         size={32} 
       />
     </div>
