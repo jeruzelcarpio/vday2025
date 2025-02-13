@@ -1,36 +1,82 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Interactive Valentine's Day Card
 
-## Getting Started
+A charming and interactive Valentine's Day card built with Next.js, React, and Tailwind CSS. This web application features animated hearts, expressive GIFs, and playful interaction that makes it impossible to say "no"!
 
-First, run the development server:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Features
+- 💖 Animated floating hearts with random positioning and rotations
+- 😊 Dynamic expression GIFs that change based on user interaction
+- 🎨 Responsive design with dark mode support
+- ✨ Interactive buttons with fun scaling animations
+- 💝 Playful "No" button that becomes smaller while "Yes" grows larger
+- 🌈 Smooth color transitions and gradient backgrounds
+- 🎭 Multiple states: hopeful, happy, and sad with corresponding visual feedback
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Technical Details
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Components
+- Uses Next.js 'use client' component
+- Implements React hooks (useState, useEffect)
+- Utilizes Lucide icons for heart animations
+- Features Next.js Image component for optimized image loading
 
-## Learn More
+### Styling
+- Tailwind CSS for utility-first styling
+- Custom CSS variables for theme colors
+- CSS keyframe animations for floating hearts
+- Backdrop blur effects for card visibility
+- Responsive design with mobile-first approach
 
-To learn more about Next.js, take a look at the following resources:
+### Interactions
+- Dynamic button scaling based on user interactions
+- Rotating "No" button text responses
+- Heart animation states (outline vs. filled)
+- Smooth transitions between emotional states
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Setup Requirements
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. Place the following GIFs in your public folder:
+   - `happy.gif` - Displayed when user clicks "Yes"
+   - `sad.gif` - Displayed when user clicks "No"
+   - `hopeful.gif` - Initial state
 
-## Deploy on Vercel
+2. Ensure you have the following dependencies:
+   ```json
+   {
+     "dependencies": {
+       "next": "^13.0.0",
+       "react": "^18.0.0",
+       "lucide-react": "latest",
+       "tailwindcss": "^3.0.0"
+     }
+   }
+   ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Customization
+
+You can customize the appearance by modifying:
+- Color variables in the global CSS
+- Heart animation parameters
+- Button text responses in the `noTexts` array
+- Animation timings and scales
+- GIF expressions
+
+
+## Usage
+
+1. Import the component into your Next.js application
+2. Add the global CSS to your project
+3. Deploy and share with your Valentine!
+
+
+## Dark Mode Support
+
+The application automatically adapts to the user's system preferences with custom dark mode styling for:
+- Background gradients
+- Card transparency
+- Text colors
+- Heart animations
+
+Perfect for creating a romantic atmosphere at any time of day! 💕
